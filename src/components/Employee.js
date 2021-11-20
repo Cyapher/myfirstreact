@@ -8,7 +8,7 @@ const Employee = () =>{
     const[employees, setEmployees] = useState([])
 
     useEffect(
-        () =>{
+        () => {
             employeeService.getEmployees() //promise
             .then(
                 response =>{
