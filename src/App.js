@@ -4,6 +4,7 @@ import Greet from './components/Greet'; // does not need .js; both are js files
 import Message from './components/Message';
 import Button from './components/Button';
 import Hello from './components/Hello';
+import Employee from './components/Employee';
 
 /*
 functional/stateless component
@@ -26,6 +27,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload. --- ginagawa mo carlos
         </p>
         <p>{Hello()}</p>
+        <Employee/>
         <Greet name="Sir Bryan">
         <Message/>
         </Greet>
