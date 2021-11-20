@@ -3,6 +3,7 @@ import './App.css';
 import Greet from './components/Greet'; // does not need .js; both are js files
 import Message from './components/Message';
 import Button from './components/Button';
+import Hello from './components/Hello';
 
 /*
 functional/stateless component
@@ -24,6 +25,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload. --- ginagawa mo carlos
         </p>
+        <p>{Hello()}</p>
         <Greet name="Sir Bryan">
         <Message/>
         </Greet>
