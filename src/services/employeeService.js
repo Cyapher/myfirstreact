@@ -1,6 +1,6 @@
 import httpclient from "../commons/httpclient"
 
-const getEmployees = () => {
+ const getEmployees = () => {
     return httpclient.get('/employees')
 }
 
