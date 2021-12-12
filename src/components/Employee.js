@@ -1,4 +1,6 @@
+import { Button } from "bootstrap"
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import employeeService from "../services/employeeService"
 
 
@@ -8,7 +10,12 @@ const Employee = () =>{
 
     useEffect(
         () => {
-            employeeService.getEmployees() //promise
+            refreshEmployee();
+        }
+    )
+
+    const refreshEmployee = () =>{
+        employeeService.getEmployees() //promise
             .then(
                 response =>{
                     setEmployees(response.data)
@@ -17,30 +24,59 @@ const Employee = () =>{
             .catch(
                 console.log("ahhh sarado")
             )
+    }
+
+    const deleteEmployee = (employeeid) => {
+        let YN = window.confirm("Are you sure you want to delete?");
+
+        if(YN){
+            employeeService.deleteEmployee(employeeid)
+            .then(
+                response =>{
+                    console.log("succesfully deleted employee")
+                    refreshEmployee();
+                }
+            )
+            .catch(
+                error =>{
+                    console.error("something went wrong", error);
+                }
+            )
         }
-    )
+    }
 
     return(
         <div>
             <h1>List of Employees</h1>
-            <div>
-                <table border="1">
-                <tr>
-                    <td>Name</td>
-                    <td>Location</td>
-                    <td>Department</td>
-                </tr>
-                {
-                    employees.map(
-                        employee => (
-                            <tr> 
-                                <td>{employee.name}</td>
-                                <td>{employee.department}</td>
-                                <td>{employee.location}</td>
-                            </tr>
-                        )
-                    )
-                }
+            <div className="container">
+                <table className="table table-hover table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Location</td>
+                            <td>Department</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            employees.map(
+                                employee => (
+                                    <tr className="table-light"> 
+                                        <td align="left">{employee.name}</td>
+                                        <td align="left">{employee.location}</td>
+                                        <td align="left">{employee.department}</td>
+                                        <td>
+                                            <div className="d-grid gap-2 d-md-flex">
+                                            <Link className="btn btn-primary" to={`/edit/${employee.employeeid}`}>Update</Link>
+                                            <button className="btn btn-danger" onClick={()=>deleteEmployee(employee.employeeid)}>Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            )
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>
