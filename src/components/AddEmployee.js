@@ -11,48 +11,57 @@ const AddEmployee = () => {
     const [department, setDepartment] = useState("");
     const navigate = useNavigate();
     const{employeeid} = useParams();
+    const[error, setError] = useState("")
 
     //Submit
     const saveEmployee = (e) =>{
         e.preventDefault();
 
-        if(employeeid){
-            //update
-            const employee = {employeeid, name, location, department};
-            employeeService.putEmployee(employee) //promise
+        if(name && location && department){
+            setError("");
 
-            //for a promise, there is .then() and .catch()
-            .then(
-                response =>{
-                    console.log("updated employee! Congrats", response.data)
-                    navigate("/employees");
-                }
-            )
-            .catch(
-                error => {
-                    console.error("big oof");
-                }
-            )
+            if(employeeid){
+                //update
+                const employee = {employeeid, name, location, department};
+                employeeService.putEmployee(employee) //promise
+
+                //for a promise, there is .then() and .catch()
+                .then(
+                    response =>{
+                        console.log("updated employee! Congrats", response.data)
+                        navigate("/employees");
+                    }
+                )
+                .catch(
+                    error => {
+                        console.error("big oof");
+                    }
+                )
+            }
+
+            else{
+                //combine the 3 data
+                //add employee
+                const employee = {name, location, department};
+                employeeService.postEmployee(employee) //promise
+
+                //for a promise, there is .then() and .catch()
+                .then(
+                    response =>{
+                        console.log("added new employee! Congrats", response.data)
+                        navigate("/employees");
+                    }
+                )
+                .catch(
+                    error => {
+                        console.error("big oof");
+                    }
+                )
+            }
         }
-
         else{
-            //combine the 3 data
-            //add employee
-            const employee = {name, location, department};
-            employeeService.postEmployee(employee) //promise
-
-            //for a promise, there is .then() and .catch()
-            .then(
-                response =>{
-                    console.log("added new employee! Congrats", response.data)
-                    navigate("/employees");
-                }
-            )
-            .catch(
-                error => {
-                    console.error("big oof");
-                }
-            )
+            console.error("Oops! Employee cannot be placed. Please fill each entry...")
+            setError("Oops! Employee cannot be placed. Please fill each entry...")
         }
     }
 
@@ -92,7 +101,8 @@ const AddEmployee = () => {
                         (e) => { //"e" = event, anonymous function
                             setName(e.target.value)
                         }
-                    }/>
+                    }
+                    />
                 </div>
                 <div className="mb-3">
                     <label for="location" className="form-label">Location:</label>
@@ -122,7 +132,12 @@ const AddEmployee = () => {
                         }
                     }/>
                 </div>
+                
                 <button type="submit" className="btn btn-primary" onClick={(e) => saveEmployee(e)}>Save</button>
+                
+                <p id="error">
+                    {error && <p className="error">{error}</p>}  
+                </p>
             </form>
         </div>
     )
