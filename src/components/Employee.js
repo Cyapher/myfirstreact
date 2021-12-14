@@ -65,10 +65,10 @@ const Employee = () =>{
                                     <tr className="table-light"> 
                                         <td align="left">{employee.name}</td>
                                         <td align="left">{employee.location}</td>
-                                        <td align="left">{employee.department}</td>
+                                        <td align="left">{employee.department}</td> 
                                         <td>
                                             <div className="d-grid gap-2 d-md-flex">
-                                            <Link className="btn btn-primary" to={`/edit/${employee.employeeid}`}>Update</Link>
+                                            <Link className="btn btn-primary" to={`/myfirstreact/edit/${employee.employeeid}`}>Update</Link>
                                             <button className="btn btn-danger" onClick={()=>deleteEmployee(employee.employeeid)}>Delete</button>
                                             </div>
                                         </td>
