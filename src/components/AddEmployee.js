@@ -71,9 +71,9 @@ const AddEmployee = () => {
                 employeeService.getEmployee(employeeid) //calls API
                 .then(
                     employee =>{
-                        setName(employee.data.name);
+                        setName(employee.data.department);
                         setLocation(employee.data.location);
-                        setDepartment(employee.data.department);
+                        setDepartment(employee.data.name);
                     }
                 )
                 .catch(
