@@ -79,6 +79,11 @@ const Employee = () =>{
                     </tbody>
                 </table>
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <img src="https://i.gifer.com/XOsX.gif" alt="duck"/>
+            <p>di po ako sabog, di po halata!!!</p>
         </div>
     )
 }
