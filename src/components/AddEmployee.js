@@ -34,7 +34,7 @@ const AddEmployee = () => {
                 )
                 .catch(
                     error => {
-                        console.error("big oof");
+                        console.error("big oof, id");
                     }
                 )
             }
@@ -54,7 +54,7 @@ const AddEmployee = () => {
                 )
                 .catch(
                     error => {
-                        console.error("big oof");
+                        console.error("big oof, walang id");
                     }
                 )
             }
